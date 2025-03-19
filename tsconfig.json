@@ -14,12 +14,7 @@
     "moduleResolution": "Bundler",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "preserveSymlinks": true,
-    "paths": {
-      "shared-components/*": ["./packages/shared-components/*"],
-      "@meteorwallet/ledger-client-v2": ["./packages/ledger-client-v2/src"],
-      "@meteorwallet/ledger-client-v2/*": ["./packages/ledger-client-v2/src/*"]
-    }
+    "preserveSymlinks": true
   },
   "exclude": ["node_modules", "**/*/node_modules", "**/*/dist"]
 }

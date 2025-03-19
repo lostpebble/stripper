@@ -1,0 +1,25 @@
+{
+  "name": "obj-stripper",
+  "version": "0.0.1",
+  "description": "Dress data down to its bare essentials",
+  "main": "dist/esm/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "test": "bun test",
+    "clean": "bunx rimraf ./dist",
+    "build": "bun run clean && tsc -p tsconfig.esm.json",
+    "build-watch": "bun run clean && tsc -p tsconfig.esm.json -w",
+    "type-check": "bunx tsc --noEmit",
+    "type-check-watch": "bunx tsc --noEmit --watch"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  }
+}
