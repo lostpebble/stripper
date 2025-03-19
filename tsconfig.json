@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleDetection": "force",
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "resolveJsonModule": true,
+    "noUnusedLocals": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "moduleResolution": "Bundler",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "preserveSymlinks": true,
+    "paths": {
+      "shared-components/*": ["./packages/shared-components/*"],
+      "@meteorwallet/ledger-client-v2": ["./packages/ledger-client-v2/src"],
+      "@meteorwallet/ledger-client-v2/*": ["./packages/ledger-client-v2/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "**/*/node_modules", "**/*/dist"]
+}

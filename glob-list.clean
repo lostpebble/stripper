@@ -1,0 +1,8 @@
+./node_modules
+./packages/*/node_modules
+./packages/*/dist*
+./packages/*/_output
+./packages/*/.tamagui
+./packages/*/.expo
+./packages/*/%ProgramData%
+**/*.tsbuildinfo
