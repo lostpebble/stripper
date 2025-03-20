@@ -6,7 +6,7 @@ import {
 import { TStripperDefinition_Value } from "../../stripper_definition.types";
 
 export class StripperExpressionMulti<
-  V extends TStripperDefinition_Value,
+  V extends TStripperDefinition_Value = TStripperDefinition_Value,
 > extends StripperExpression {
   constructor(
     public definition:

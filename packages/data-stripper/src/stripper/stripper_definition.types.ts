@@ -6,15 +6,34 @@ import {
   IStripperDefinition_Expression_Not,
 } from "./stripper_expression.types";
 
-export type TSeekOptions = {
-  maxDepth: number;
-};
+/**
+ * CORE SEEK TYPE
+ *
+ * This is the core type that is used to seek out data in a structure. Can be set to seek at
+ * a specific depth, or to seek at any depth.
+ */
 
-export interface IStripperDefinition_Seek {
+export type TSeekOptions =
+  | {
+      maxDepth: number;
+    }
+  | {
+      minDepth: number;
+    }
+  | {
+      minDepth: number;
+      maxDepth: number;
+    };
+
+export interface IStripperDefinition_Seek<T extends TStripperSeekTarget = TStripperSeekTarget> {
   type: EStripperType.seek;
-  value: TStripperDefinition_Value;
+  value: T;
   seekOptions?: TSeekOptions;
 }
+
+/**
+ * VALUE TARGETS
+ */
 
 export interface IStripperDefinition_Value_Any {
   type: EStripperType.value;
@@ -22,18 +41,26 @@ export interface IStripperDefinition_Value_Any {
   keyMustExist?: boolean;
 }
 
-export interface IStripperDefinition_Value_Stripper<
+export interface IStripperDefinition_Value_Seek<
+  T extends TStripperSeekTarget = TStripperSeekTarget,
+> {
+  type: EStripperType.value;
+  valueType: EStripperValueType.seeker;
+  seek: IStripperDefinition_Seek<T>;
+}
+
+/*export interface IStripperDefinition_Value_Stripper<
   S extends TStripperDefinition = TStripperDefinition,
 > {
   type: EStripperType.value;
   valueType: EStripperValueType.stripper;
   stripper: S;
-}
+}*/
 
-export type TStripperDefinition_Value<T extends TStripperDefinition = TStripperDefinition> =
+export type TStripperDefinition_Value<T extends TStripperSeekTarget = TStripperSeekTarget> =
   | IStripperDefinition_Value_Any
   | TStripperDefinition_Value_Primitive
-  | IStripperDefinition_Value_Stripper<T>;
+  | IStripperDefinition_Value_Seek<T>;
 
 export interface IStripperDefinition_Object_Props {
   [key: string]: TStripperDefinition_Value;
@@ -47,10 +74,7 @@ export interface IStripperDefinition_Obj {
 export interface IStripperDefinition_InstanceOf {
   type: EStripperType.instance_of;
   class: Function;
-  matchInside?:
-    | IStripperDefinition_Obj
-    | IStripperDefinition_PossibleKeys
-    | IStripperDefinition_Seek;
+  matchInside?: IStripperDefinition_Seek;
 }
 
 export interface IStripperDefinition_PossibleKeys {
@@ -64,15 +88,13 @@ export interface IStripperDefinition_Array {
   value: TStripperDefinition_Value;
 }
 
-export type TStripperDefinition =
-  | IStripperDefinition_Value_Stripper
-  | TStripperDefinition_Value_Primitive
+export type TStripperSeekTarget =
   | IStripperDefinition_Value_Any
+  | TStripperDefinition_Value_Primitive
   | IStripperDefinition_Obj
   | IStripperDefinition_Array
   | IStripperDefinition_PossibleKeys
   | IStripperDefinition_InstanceOf
-  | IStripperDefinition_Seek
   | IStripperDefinition_Expression_Multi_Range
   | IStripperDefinition_Expression_Multi_AnyOrAll
   | IStripperDefinition_Expression_Not;

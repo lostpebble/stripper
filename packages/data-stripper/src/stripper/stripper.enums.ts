@@ -27,7 +27,8 @@ export enum EStripperExpressionMultiMatchType {
 export enum EStripperValueType {
   any = "any",
   primitive = "primitive",
-  stripper = "stripper",
+  // stripper = "stripper",
+  seeker = "seeker",
 }
 
 export enum EStripperValuePrimitiveDataType {

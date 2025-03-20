@@ -15,7 +15,8 @@
     "type-check": "bunx tsc --noEmit",
     "type-check-watch": "bunx tsc --noEmit --watch"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "json-stringify-pretty-compact": "^4.0.0"
   },
   "private": false,

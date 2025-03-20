@@ -1,9 +1,9 @@
 import { TStripperInput_Obj } from "./stripper_build.types";
 import { IStripperDefinition_Object_Props } from "./stripper_definition.types";
-import { StripperPossibleKeys } from "./classes/StripperPossibleKeys";
-import { StripperObject } from "./classes/StripperObject";
+import { StripperPossibleKeys } from "./classes/meta/StripperPossibleKeys";
+import { StripperObject } from "./classes/data_type/StripperObject";
 import { StripperValueAny } from "./classes/value/StripperValueAny";
-import { StripperArray } from "./classes/StripperArray";
+import { StripperArray } from "./classes/data_type/StripperArray";
 import { StripperValue } from "./classes/value/StripperValue";
 import { EStripperType } from "./stripper.enums";
 
@@ -21,10 +21,12 @@ const obj = (input: TStripperInput_Obj): StripperObject => {
 };
 
 const any = (): StripperValueAny => {
-  return new StripperValueAny();
+  return new StripperValueAny({
+    type: EStripperType.value,
+  });
 };
 
-const possibleObjectKeys = (keys: (string | RegExp)[]): StripperPossibleKeys => {
+const possibleKeys = (keys: (string | RegExp)[]): StripperPossibleKeys => {
   return new StripperPossibleKeys({
     matchKeys: keys,
     type: EStripperType.match_property_keys,
@@ -40,7 +42,7 @@ const array = (value: StripperValue = any()): StripperArray => {
 };
 
 export const S = {
-  possibleObjectKeys,
+  possibleKeys,
   obj,
   array,
   any,

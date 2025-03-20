@@ -24,7 +24,7 @@ const deviceStripperOutsideIn = S.possibleObjectKeys(
 import stringify from "json-stringify-pretty-compact";
 import { S } from "../stripper/stripper";
 
-const deviceStripper = S.possibleObjectKeys([
+const deviceStripper = S.possibleKeys([
   "device",
   "selectedDevice",
   "devices",
@@ -39,3 +39,17 @@ const deviceStripper = S.possibleObjectKeys([
 console.log(stringify(deviceStripper.definition));
 
 // const notSomething = S.
+
+const T: any = {};
+
+class Device {}
+
+T.instanceOf(Device).seek();
+
+T.instanceOf(Device).seek(T.anyOf([T.possibleKeys()]));
+
+T.instanceOf(Device).possibleKeys(["device", "name", "id"]).withValue(T.string());
+
+T.instanceOf(Device).hasProps({
+  id: T.string(),
+});
