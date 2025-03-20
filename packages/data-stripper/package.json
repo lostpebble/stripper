@@ -1,5 +1,5 @@
 {
-  "name": "obj-stripper",
+  "name": "data-stripper",
   "version": "0.0.1",
   "description": "Dress data down to its bare essentials",
   "main": "dist/esm/index.js",
