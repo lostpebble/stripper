@@ -6,10 +6,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "type": "module",
-  "files": [
-    "dist",
-    "package.json"
-  ],
+  "files": ["dist", "package.json"],
   "scripts": {
     "test": "bun test",
     "clean": "bunx rimraf ./dist",
@@ -17,6 +14,9 @@
     "build-watch": "bun run clean && tsc -p tsconfig.esm.json -w",
     "type-check": "bunx tsc --noEmit",
     "type-check-watch": "bunx tsc --noEmit --watch"
+  },
+  "dependencies": {
+    "json-stringify-pretty-compact": "^4.0.0"
   },
   "private": false,
   "publishConfig": {
