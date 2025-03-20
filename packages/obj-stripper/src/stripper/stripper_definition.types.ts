@@ -1,65 +1,61 @@
-export enum EStripperType {
-  match_object_keys = "match_object_keys",
-  obj = "obj",
-  array = "array",
-  tuple = "tuple",
-  value = "value",
-  any_of = "any_of",
-}
+import { EStripperType, EStripperValueType } from "./stripper.enums";
+import { TStripperDefinition_Value_Primitive } from "./stripper_primitive_value.types";
+import {
+  IStripperDefinition_Expression_Multi_AnyOrAll,
+  IStripperDefinition_Expression_Multi_Range,
+  IStripperDefinition_Expression_Not,
+} from "./stripper_expression.types";
 
-export enum EPropType {
-  any = "any",
-  string = "string",
-  number = "number",
-  boolean = "boolean",
-  undefined = "undefined",
-  null = "null",
-  /**
-   * "undefined" or "null"
-   */
-  nullish = "nullish",
-}
+export type TSeekOptions = {
+  maxDepth: number;
+};
 
-export enum EValueType {
-  any = "any",
-  primitive = "primitive",
-  stripper = "stripper",
+export interface IStripperDefinition_Seek {
+  type: EStripperType.seek;
+  value: TStripperDefinition_Value;
+  seekOptions?: TSeekOptions;
 }
 
 export interface IStripperDefinition_Value_Any {
   type: EStripperType.value;
-  valueType: EValueType.any;
+  valueType: EStripperValueType.any;
+  keyMustExist?: boolean;
 }
 
-export interface IStripperDefinition_Value_Prop {
+export interface IStripperDefinition_Value_Stripper<
+  S extends TStripperDefinition = TStripperDefinition,
+> {
   type: EStripperType.value;
-  valueType: EValueType.primitive;
-  propType: EPropType;
+  valueType: EStripperValueType.stripper;
+  stripper: S;
 }
 
-export interface IStripperDefinition_Value_Stripper {
-  type: EStripperType.value;
-  valueType: EValueType.stripper;
-  stripper: TStripperDefinition;
-}
-
-export type TStripperDefinition_Value =
+export type TStripperDefinition_Value<T extends TStripperDefinition = TStripperDefinition> =
   | IStripperDefinition_Value_Any
-  | IStripperDefinition_Value_Prop
-  | IStripperDefinition_Value_Stripper;
+  | TStripperDefinition_Value_Primitive
+  | IStripperDefinition_Value_Stripper<T>;
 
-export interface IStripperDefinitionObject_Props {
+export interface IStripperDefinition_Object_Props {
   [key: string]: TStripperDefinition_Value;
 }
 
 export interface IStripperDefinition_Obj {
   type: EStripperType.obj;
-  props: IStripperDefinitionObject_Props;
+  props: IStripperDefinition_Object_Props;
 }
 
-export interface IStripperDefinition_MatchObjectKeys {
-  type: EStripperType.match_object_keys;
-  matchKeys: string[];
+export interface IStripperDefinition_InstanceOf {
+  type: EStripperType.instance_of;
+  class: Function;
+  matchInside?:
+    | IStripperDefinition_Obj
+    | IStripperDefinition_PossibleKeys
+    | IStripperDefinition_Seek;
+}
+
+export interface IStripperDefinition_PossibleKeys {
+  type: EStripperType.match_property_keys;
+  matchKeys: (string | RegExp)[];
   value: TStripperDefinition_Value;
 }
 
@@ -68,14 +64,15 @@ export interface IStripperDefinition_Array {
   value: TStripperDefinition_Value;
 }
 
-export interface IStripperDefinition_AnyOfValue {
-  type: EStripperType.any_of;
-  options: TStripperDefinition_Value[];
-}
-
 export type TStripperDefinition =
-  | TStripperDefinition_Value
-  | IStripperDefinition_AnyOfValue
+  | IStripperDefinition_Value_Stripper
+  | TStripperDefinition_Value_Primitive
+  | IStripperDefinition_Value_Any
   | IStripperDefinition_Obj
   | IStripperDefinition_Array
-  | IStripperDefinition_MatchObjectKeys;
+  | IStripperDefinition_PossibleKeys
+  | IStripperDefinition_InstanceOf
+  | IStripperDefinition_Seek
+  | IStripperDefinition_Expression_Multi_Range
+  | IStripperDefinition_Expression_Multi_AnyOrAll
+  | IStripperDefinition_Expression_Not;

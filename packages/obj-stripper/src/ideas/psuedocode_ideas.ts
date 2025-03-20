@@ -37,3 +37,5 @@ const deviceStripper = S.possibleObjectKeys([
 );
 
 console.log(stringify(deviceStripper.definition));
+
+// const notSomething = S.
