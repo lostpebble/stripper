@@ -1,9 +1,9 @@
-import { TStripperInput_Obj } from "./stripper_build.types";
-import { IStripperDefinition_Object_Props } from "./stripper_definition.types";
+import type { TStripperInput_Obj } from "./stripper_build.types";
+import type { IStripperDefinition_Object_Props } from "./stripper_definition.types";
 import { StripperPossibleKeys } from "./classes/StripperPossibleKeys";
-import { StripperObject } from "./classes/StripperObject";
+import { StripperObject } from "./classes/data_type/StripperObject.ts";
 import { StripperValueAny } from "./classes/value/StripperValueAny";
-import { StripperArray } from "./classes/StripperArray";
+import { StripperArray } from "./classes/data_type/StripperArray.ts";
 import { StripperValue } from "./classes/value/StripperValue";
 import { EStripperType } from "./stripper.enums";
 

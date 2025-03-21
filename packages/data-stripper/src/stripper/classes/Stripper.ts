@@ -1,5 +1,4 @@
-import { TStripperDefinition } from "../stripper_definition.types";
-
 export abstract class Stripper {
-  abstract definition: TStripperDefinition;
+  abstract test(value: any): boolean;
+  // abstract definition: TStripperDefinition;
 }

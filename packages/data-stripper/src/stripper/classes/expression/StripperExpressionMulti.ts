@@ -1,12 +1,12 @@
 import { StripperExpression } from "./StripperExpression";
-import {
+import type {
   IStripperDefinition_Expression_Multi_AnyOrAll,
   IStripperDefinition_Expression_Multi_Range,
 } from "../../stripper_expression.types";
-import { TStripperDefinition_Value } from "../../stripper_definition.types";
+import type { TStripperDefinition_Value } from "../../stripper_definition.types";
 
 export class StripperExpressionMulti<
-  V extends TStripperDefinition_Value,
+  V extends TStripperDefinition_Value = TStripperDefinition_Value,
 > extends StripperExpression {
   constructor(
     public definition:

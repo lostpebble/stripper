@@ -1,6 +1,6 @@
 import { EStripperType, EStripperValueType } from "./stripper.enums";
-import { TStripperDefinition_Value_Primitive } from "./stripper_primitive_value.types";
-import {
+import type { TStripperDefinition_Value_Primitive } from "./stripper_primitive_value.types";
+import type {
   IStripperDefinition_Expression_Multi_AnyOrAll,
   IStripperDefinition_Expression_Multi_Range,
   IStripperDefinition_Expression_Not,

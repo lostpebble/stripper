@@ -1,17 +1,17 @@
 import { Stripper } from "./Stripper";
-import { IStripperDefinition_PossibleKeys } from "../stripper_definition.types";
+import type { IStripperDefinition_PossibleKeys } from "../stripper_definition.types";
 import { StripperValue } from "./value/StripperValue";
-import { StripperArray } from "./StripperArray";
-import { StripperObject } from "./StripperObject";
+import { StripperArray } from "./data_type/StripperArray.ts";
+import { StripperObject } from "./data_type/StripperObject.ts";
 import { EStripperType, EStripperValueType } from "../stripper.enums";
-import { StripperExpressionMulti } from "./expression/StripperExpressionMulti";
+import { StripperExpression } from "./expression/StripperExpression";
 
 export class StripperPossibleKeys extends Stripper {
   constructor(public definition: IStripperDefinition_PossibleKeys) {
     super();
   }
 
-  withValue(value: StripperValue | StripperArray | StripperObject | StripperExpressionMulti) {
+  withValue(value: StripperValue | StripperArray | StripperObject | StripperExpression) {
     if (value.definition.type === EStripperType.value) {
       this.definition.value = value.definition;
     } else {
@@ -24,6 +24,4 @@ export class StripperPossibleKeys extends Stripper {
 
     return this;
   }
-
-  seek(value: StripperValue | StripperArray | StripperObject | StripperExpressionMulti) {}
 }

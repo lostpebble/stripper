@@ -18,6 +18,9 @@
   "dependencies": {
     "json-stringify-pretty-compact": "^4.0.0"
   },
+  "devDependencies": {
+    "@types/bun": "^1.2.5"
+  },
   "private": false,
   "publishConfig": {
     "access": "public"

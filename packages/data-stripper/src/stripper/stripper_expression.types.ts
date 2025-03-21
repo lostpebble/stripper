@@ -3,7 +3,7 @@ import {
   EStripperExpressionMultiMatchType,
   EStripperType,
 } from "./stripper.enums";
-import { TStripperDefinition_Value } from "./stripper_definition.types";
+import type { TStripperDefinition_Value } from "./stripper_definition.types";
 
 export interface IStripperDefinition_Expression_Multi_AnyOrAll<
   V extends TStripperDefinition_Value = TStripperDefinition_Value,
